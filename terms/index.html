@@ -28,9 +28,8 @@ a{color:var(--lime)} footer{margin-top:28px;color:var(--muted);font-size:14px} f
   .lang a:not([aria-current]):hover { color:#eef3e8; }
   @media (max-width:560px) { body { padding-top:68px !important; } }
 </style>
-<script>try { if (localStorage.getItem('wm-lang') === 'ru') location.replace('/ru/terms/' + location.hash); } catch (e) {}</script>
 </head><body>
-<nav class="lang" aria-label="Language"><a href="/terms/" data-l="en" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}" aria-current="true">EN</a><a href="/ru/terms/" data-l="ru" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}">RU</a></nav>
+<nav class="lang" aria-label="Language"><a href="/terms/" data-l="en" onclick="this.href += location.hash;" aria-current="true">EN</a><a href="/ru/terms/" data-l="ru" onclick="this.href += location.hash;">RU</a></nav>
 <main>
 <a class="logo" href="/"><img src="/logo-mark.svg" alt="" width="34" height="34" style="vertical-align:-9px;margin-right:9px"><b>Watt</b>ermelon</a>
 <h1>Terms of Use</h1><p class="edition">Version of 9 November 2026</p>

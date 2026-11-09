@@ -55,10 +55,9 @@
   .lang a:not([aria-current]):hover { color:#eef3e8; }
   @media (max-width:560px) { body { padding-top:68px !important; } }
 </style>
-<script>try { if (localStorage.getItem('wm-lang') === 'ru') location.replace('/ru/auth/' + location.hash); } catch (e) {}</script>
 </head>
 <body>
-<nav class="lang" aria-label="Language"><a href="/auth/" data-l="en" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}" aria-current="true">EN</a><a href="/ru/auth/" data-l="ru" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}">RU</a></nav>
+<nav class="lang" aria-label="Language"><a href="/auth/" data-l="en" onclick="this.href += location.hash;" aria-current="true">EN</a><a href="/ru/auth/" data-l="ru" onclick="this.href += location.hash;">RU</a></nav>
 
 
 <div class="logo"><img src="/logo-mark.svg" alt="" width="34" height="34" style="vertical-align:-9px;margin-right:9px"><b>Watt</b>ermelon</div>
