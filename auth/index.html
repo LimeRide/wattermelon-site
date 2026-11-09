@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Почта подтверждена - Wattermelon</title>
+<title>Email confirmed - Wattermelon</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/logo-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:title" content="Wattermelon">
-<meta property="og:description" content="Приложение для велосипедистов: тренировки, топливо и компания на заезд.">
+<meta property="og:description" content="An app for cyclists: training, fuel and people to ride with.">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wattermelon.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0d0a">
@@ -45,8 +46,20 @@
   .err h1 .lime { color:var(--flesh); }
   [hidden] { display:none !important; }
 </style>
+<style>
+  .lang { position:fixed; top:max(14px, env(safe-area-inset-top)); right:max(14px, env(safe-area-inset-right)); z-index:50;
+    display:flex; gap:2px; padding:3px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+    font:700 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; letter-spacing:.08em; }
+  .lang a { color:#8f9a87; text-decoration:none; padding:6px 9px; border-radius:999px; }
+  .lang a[aria-current] { background:#c7ff0d; color:#0b0d0a; }
+  .lang a:not([aria-current]):hover { color:#eef3e8; }
+  @media (max-width:560px) { body { padding-top:68px !important; } }
+</style>
+<script>try { if (localStorage.getItem('wm-lang') === 'ru') location.replace('/ru/auth/' + location.hash); } catch (e) {}</script>
 </head>
 <body>
+<nav class="lang" aria-label="Language"><a href="/auth/" data-l="en" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}" aria-current="true">EN</a><a href="/ru/auth/" data-l="ru" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}">RU</a></nav>
+
 
 <div class="logo"><img src="/logo-mark.svg" alt="" width="34" height="34" style="vertical-align:-9px;margin-right:9px"><b>Watt</b>ermelon</div>
 
@@ -67,10 +80,10 @@
       </g>
     </svg>
   </div>
-  <h1>Почта <span class="lime">подтверждена</span></h1>
-  <p class="sub">Аккаунт готов. Возвращайся в Wattermelon - профиль и заезды теперь сохраняются в облаке.</p>
-  <a class="btn" id="open" href="wattermelon://auth-callback">ОТКРЫТЬ WATTERMELON</a>
-  <p class="note" id="desktop" hidden>Открой Wattermelon на телефоне и войди с этой почтой.</p>
+  <h1>Email <span class="lime">confirmed</span></h1>
+  <p class="sub">Your account is ready. Head back to Wattermelon - your profile and rides are now saved in the cloud.</p>
+  <a class="btn" id="open" href="wattermelon://auth-callback">OPEN WATTERMELON</a>
+  <p class="note" id="desktop" hidden>Open Wattermelon on your phone and sign in with this email.</p>
 </main>
 
 <main id="fail" class="err" hidden>
@@ -84,9 +97,9 @@
       </g>
     </svg>
   </div>
-  <h1>Ссылка <span class="lime">устарела</span></h1>
-  <p class="sub" id="failText">Такие ссылки работают один раз и недолго. Открой Wattermelon и нажми «Отправить письмо ещё раз».</p>
-  <a class="btn" href="wattermelon://auth-callback">ОТКРЫТЬ WATTERMELON</a>
+  <h1>Link <span class="lime">expired</span></h1>
+  <p class="sub" id="failText">These links work only once and for a short time. Open Wattermelon and request a new email.</p>
+  <a class="btn" href="wattermelon://auth-callback">OPEN WATTERMELON</a>
 </main>
 
 <script>
@@ -97,7 +110,7 @@
     if (failed) {
       document.getElementById("ok").hidden = true;
       document.getElementById("fail").hidden = false;
-      document.title = "Ссылка устарела - Wattermelon";
+      document.title = "Link expired - Wattermelon";
     } else if (params.get("access_token")) {
       // Ключи входа передаём в приложение - оно само войдёт в аккаунт.
       document.getElementById("open").href = "wattermelon://auth-callback#" + raw;

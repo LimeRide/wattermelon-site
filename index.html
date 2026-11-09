@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wattermelon - арбуз зреет</title>
-<meta name="description" content="Скоро здесь появится Wattermelon - приложение для велосипедистов. Пока ждёшь - накрути ватт.">
+<title>Wattermelon - the melon is ripening</title>
+<meta name="description" content="Wattermelon, an app for cyclists, is coming soon. While you wait, crank out some watts.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/logo-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:title" content="Wattermelon">
-<meta property="og:description" content="Приложение для велосипедистов: тренировки, топливо и компания на заезд.">
+<meta property="og:description" content="An app for cyclists: training, fuel and people to ride with.">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wattermelon.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0d0a">
@@ -46,14 +47,26 @@
   footer { margin-top:34px; color:var(--muted); font-size:14px; }
   footer a { color:var(--muted); }
 </style>
+<style>
+  .lang { position:fixed; top:max(14px, env(safe-area-inset-top)); right:max(14px, env(safe-area-inset-right)); z-index:50;
+    display:flex; gap:2px; padding:3px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+    font:700 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; letter-spacing:.08em; }
+  .lang a { color:#8f9a87; text-decoration:none; padding:6px 9px; border-radius:999px; }
+  .lang a[aria-current] { background:#c7ff0d; color:#0b0d0a; }
+  .lang a:not([aria-current]):hover { color:#eef3e8; }
+  @media (max-width:560px) { body { padding-top:68px !important; } }
+</style>
+<script>try { if (localStorage.getItem('wm-lang') === 'ru') location.replace('/ru/' + location.hash); } catch (e) {}</script>
 </head>
 <body>
+<nav class="lang" aria-label="Language"><a href="/" data-l="en" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}" aria-current="true">EN</a><a href="/ru/" data-l="ru" onclick="this.href += location.hash; try { localStorage.setItem('wm-lang', this.dataset.l) } catch (e) {}">RU</a></nav>
+
 
 <div class="logo"><img src="/logo-mark.svg" alt="" width="34" height="34" style="vertical-align:-9px;margin-right:9px"><b>Watt</b>ermelon</div>
-<h1>Арбуз зреет.</h1>
-<p class="sub">Скоро здесь появится приложение для велосипедистов: тренировки, топливо и компания на заезд. Пока ждёшь - накрути ватт.</p>
+<h1>The melon is ripening.</h1>
+<p class="sub">An app for cyclists is coming soon: training, fuel and people to ride with. While you wait, crank out some watts.</p>
 
-<div class="gauge" id="gauge" role="button" tabindex="0" aria-label="Жми, чтобы крутить педали">
+<div class="gauge" id="gauge" role="button" tabindex="0" aria-label="Tap to pedal">
   <svg viewBox="0 0 400 215" aria-hidden="true">
     <g class="slice">
       <!-- корка -->
@@ -76,12 +89,12 @@
 </div>
 
 <div class="watts"><span id="w">0</span><small>W</small></div>
-<div class="zone" id="zone">Зелёный. Крути!</div>
-<div class="hint" id="hint">Жми на арбуз (или пробел). Чем чаще - тем спелее.</div>
+<div class="zone" id="zone">Unripe. Pedal!</div>
+<div class="hint" id="hint">Tap the melon (or press space). The faster you tap, the riper it gets.</div>
 <div class="peak" id="peak"></div>
 <div class="msg" id="msg"></div>
 
-<footer>© 2026 Wattermelon · <a href="/privacy/">Конфиденциальность</a> · <a href="/terms/">Условия</a> · <a href="mailto:hello@wattermelon.com">hello@wattermelon.com</a></footer>
+<footer>© 2026 Wattermelon · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@wattermelon.com">hello@wattermelon.com</a></footer>
 
 <script>
 (function () {
@@ -109,17 +122,17 @@
   }
 
   var zones = [
-    [450, 'Спелый! Максимум сочности'],
-    [350, 'VO2max. Держись!'],
-    [250, 'Порог. Уже краснеет'],
-    [150, 'Темп. Наливается'],
-    [50,  'Разминка. Розовеет'],
-    [0,   'Зелёный. Крути!']
+    [450, 'Ripe! Maximum juice'],
+    [350, 'VO2max. Hold on!'],
+    [250, 'Threshold. Turning red'],
+    [150, 'Tempo. Filling out'],
+    [50,  'Warm-up. Turning pink'],
+    [0,   'Unripe. Pedal!']
   ];
   var lines = [
-    'Вот это ватты. Приложение созреет так же быстро.',
-    'Сочно. Скоро сможешь записать это в настоящий заезд.',
-    'Спелый! Теперь не забудь про топливо.'
+    'Now those are watts. The app will ripen just as fast.',
+    'Juicy. Soon you can log this as a real ride.',
+    'Ripe! Now don\'t forget to fuel.'
   ];
 
   function push() {
@@ -151,7 +164,7 @@
     var shown = Math.round(watts);
     el.w.textContent = shown;
     for (var i = 0; i < zones.length; i++) if (shown >= zones[i][0]) { el.zone.textContent = zones[i][1]; break; }
-    if (shown > peak) { peak = shown; if (peak > 40) el.peak.textContent = 'Твой пик: ' + peak + ' W'; }
+    if (shown > peak) { peak = shown; if (peak > 40) el.peak.textContent = 'Your peak: ' + peak + ' W'; }
     if (shown >= 450 && !ripeShown) {
       ripeShown = true;
       el.msg.textContent = lines[Math.floor(Math.random() * lines.length)];
